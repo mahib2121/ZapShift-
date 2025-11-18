@@ -4,6 +4,10 @@ import HowWorks from '../../components/HowWorks';
 import OurServices from '../../components/OurServices';
 import Brands from '../../components/Brands';
 import Feature from '../../components/Feature';
+import ReviewCard from '../ReviewPage';
+import ReviewPage from '../ReviewPage';
+
+const reviewPromis = fetch('/reviews.json').then(res => res.json())
 
 const Home = () => {
     return (
@@ -38,6 +42,8 @@ const Home = () => {
             </div>
             <div>
                 <Feature></Feature>
+                {/* <ReviewCard reviewPromis={reviewPromis}></ReviewCard> */}
+                <ReviewPage reviewPromis={reviewPromis}></ReviewPage>
             </div>
 
 
