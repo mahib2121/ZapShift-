@@ -8,7 +8,7 @@ const Coverage = () => {
 
     const pos = [23.6850, 90.3563];
 
-    // CREATE MAP REFERENCE
+
     const mapRef = useRef(null);
 
     const handleSearch = (e) => {
@@ -23,7 +23,7 @@ const Coverage = () => {
 
         if (district) {
             const coord = [district.latitude, district.longitude];
-            mapRef.current.flyTo(coord, 12); // zoom to district
+            mapRef.current.flyTo(coord, 12);
         } else {
             alert("District not found");
         }
@@ -47,7 +47,7 @@ const Coverage = () => {
                 We are available in 64 Districts
             </p>
 
-            {/* Search Bar */}
+
             <form onSubmit={handleSearch} className="w-full">
                 <input
                     type="text"
@@ -57,7 +57,7 @@ const Coverage = () => {
                 />
             </form>
 
-            {/* Map Box */}
+
             <div className="
                 w-full 
                 h-[350px]        
@@ -69,7 +69,7 @@ const Coverage = () => {
                     zoom={7}
                     scrollWheelZoom={false}
                     className="w-full h-full"
-                    ref={mapRef}   // IMPORTANT
+                    ref={mapRef}
                 >
                     <TileLayer
                         attribution="&copy; OpenStreetMap contributors"

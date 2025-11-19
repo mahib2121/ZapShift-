@@ -17,7 +17,6 @@ const Navbar = () => {
 
     const links = <>
         <li><NavLink to="/" style={getLinkStyle}>Home</NavLink></li>
-
         <li><NavLink to="/profile" style={getLinkStyle}>Services </NavLink></li>
         <li><NavLink to="/coverage" style={getLinkStyle}>Coverage </NavLink></li>
 
@@ -43,7 +42,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <button className='btn-primary px-2 bg-gray-400 rounded py-1'>Button</button>
+                    <button onClick={handelLogin} className='btn-primary px-2 bg-gray-400 rounded py-1'>Login</button>
                 </div>
             </div>
         </div>
