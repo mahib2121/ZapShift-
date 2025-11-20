@@ -1,27 +1,28 @@
-import React from 'react';
-import Logo from '../components/logo';
-import { Outlet } from 'react-router-dom';
-import LpageImg from '../assets/authImage.png';
+import React from "react";
+import Logo from "../components/logo";
+import { Link, Outlet } from "react-router-dom";
+import LpageImg from "../assets/authImage.png";
 
 const AuthLayout = () => {
     return (
-        <div className="max-w-7xl mx-auto px-4">
-            <Logo />
+        <div className="max-w-7xl mx-auto px-4 py-6">
+            <Link to='/'>  <Logo /></Link>
 
-            {/* Responsive Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center min-h-screen">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center min-h-[80vh]">
 
-                {/* Left: Login / Signup Form */}
+                {/* Left: Form */}
                 <div className="flex justify-center md:justify-start">
-                    <Outlet />
+                    <div className="w-full max-w-sm">
+                        <Outlet />
+                    </div>
                 </div>
 
-                {/* Right: Image */}
-                <div className="flex justify-center md:justify-end">
+                {/* Right: Illustration */}
+                <div className="hidden md:flex justify-end">
                     <img
                         src={LpageImg}
                         alt="Auth"
-                        className="w-full max-w-md md:max-w-full object-contain"
+                        className="w-full max-w-lg object-contain select-none"
                     />
                 </div>
             </div>

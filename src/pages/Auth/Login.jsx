@@ -1,50 +1,69 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-
-    const onSubmit = (data) => {
-        console.log("Login Data:", data);
-        // Add login logic (API call, Firebase auth, etc.)
+    const { loginUser } = useAuth();
+    const location = useLocation()
+    const navigate = useNavigate()
+    const onSubmit = async (data) => {
+        try {
+            const res = await loginUser(data.email, data.password);
+            console.log(res.user);
+            navigate(location.state)
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                    <legend className="fieldset-legend">Login</legend>
+        <div className="min-h-screen flex items-center justify-center px-4">
+            <form onSubmit={handleSubmit(onSubmit)}
+                className="w-full max-w-sm bg-base-200 p-6 rounded-xl shadow-md">
+                <h2 className="text-xl font-semibold text-center mb-4">Login</h2>
 
-                    <label className="label">Email</label>
-                    <input
-                        type="email"
-                        className="input"
-                        placeholder="Email"
-                        {...register("email", { required: "Email is required" })}
-                    />
-                    {errors.email && (
-                        <p className="text-red-500 text-sm">
-                            {errors.email.message}
-                        </p>
-                    )}
+                {/* Email */}
+                <label className="label">Email</label>
+                <input
+                    type="email"
+                    className="input input-bordered w-full"
+                    placeholder="Enter your email"
+                    {...register("email", { required: "Email is required" })}
+                />
+                {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">
+                        {errors.email.message}
+                    </p>
+                )}
 
-                    <label className="label mt-3">Password</label>
-                    <input
-                        type="password"
-                        className="input"
-                        placeholder="Password"
-                        {...register("password", { required: "Password is required" })}
-                    />
-                    {errors.password && (
-                        <p className="text-red-500 text-sm">
-                            {errors.password.message}
-                        </p>
-                    )}
+                {/* Password */}
+                <label className="label mt-4">Password</label>
+                <input
+                    type="password"
+                    className="input input-bordered w-full"
+                    placeholder="Enter your password"
+                    {...register("password", {
+                        required: "Password is required",
+                        minLength: {
+                            value: 6,
+                            message: "Minimum length is 6 characters",
+                        },
+                    })}
+                />
+                {errors.password && (
+                    <p className="text-red-500 text-sm mt-1">
+                        {errors.password.message}
+                    </p>
+                )}
 
-                    <button className="btn btn-neutral mt-4" type="submit">
-                        Login
-                    </button>
-                </fieldset>
+                <button className="btn btn-neutral w-full mt-6" type="submit">
+                    Login
+                </button>
+                <p>Alreaday have a account  <Link state={location.state} to='/register' className="link link-primary" >Register Now  </Link></p>
+                <SocialLogin></SocialLogin>
             </form>
         </div>
     );

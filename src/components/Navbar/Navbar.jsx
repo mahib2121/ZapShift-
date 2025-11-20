@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Home from '../../pages/Home/Home';
 import Logo from '../logo';
 import { MdArrowOutward } from "react-icons/md";
+import useAuth from '../../hooks/useAuth';
 // Active link style function
 const getLinkStyle = ({ isActive }) => {
     return {
@@ -14,6 +15,10 @@ const getLinkStyle = ({ isActive }) => {
 
 const Navbar = () => {
 
+    const { user, logoutUser } = useAuth()
+    const handelLogout = () => {
+        logoutUser().then().catch(e => { console.log(e); })
+    }
 
     const links = <>
         <li><NavLink to="/" style={getLinkStyle}>Home</NavLink></li>
@@ -41,8 +46,12 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <button onClick={handelLogin} className='btn-primary px-2 bg-gray-400 rounded py-1'>Login</button>
+                <div className="navbar-end gap-2">
+                    {
+                        user ? <button onClick={handelLogout} className='btn-primary px-2 bg-gray-400 rounded py-1'>Logout</button> :
+                            <Link to='/login'><button className='btn-primary px-2 bg-gray-400 rounded py-1'>Login</button></Link>
+                    }
+                    <Link to='/rider'><button className='btn-primary px-2 bg-lime-400 rounded py-1'>Be a Rider </button></Link>
                 </div>
             </div>
         </div>

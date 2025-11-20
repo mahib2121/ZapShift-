@@ -6,6 +6,7 @@ import Brands from '../../components/Brands';
 import Feature from '../../components/Feature';
 import ReviewCard from '../ReviewPage';
 import ReviewPage from '../ReviewPage';
+import { Link } from 'react-router-dom';
 
 const reviewPromis = fetch('/reviews.json').then(res => res.json())
 
@@ -23,9 +24,11 @@ const Home = () => {
                         Track Your Parcel
                     </button>
 
-                    <button className="px-6 py-3 border border-gray-300 rounded-full font-semibold">
-                        Be A Rider
-                    </button>
+                    <Link to='/rider'>
+                        <button className="px-6 py-3 border border-gray-300 rounded-full font-semibold">
+                            Be A Rider
+                        </button>
+                    </Link>
                 </div>
             </div>
             <div>
