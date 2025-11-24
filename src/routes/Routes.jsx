@@ -9,6 +9,7 @@ import Login from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
 import PrivateRoute from './PriveteRoute';
 import Raider from '../pages/RAider/Raider';
+import SendParcel from '../pages/sendParcel';
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,13 @@ export const router = createBrowserRouter([
         element: <PrivateRoute>
           <Raider></Raider>
         </PrivateRoute>
+      },
+      {
+        path: '/sendParcel',
+        element: <PrivateRoute>
+          <SendParcel></SendParcel>
+        </PrivateRoute>,
+        loader: () => fetch('warehouses.json').then(res => res.json())
       },
       {
         path: '/coverage',
