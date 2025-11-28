@@ -10,53 +10,74 @@ import Register from '../pages/Auth/Register';
 import PrivateRoute from './PriveteRoute';
 import Raider from '../pages/RAider/Raider';
 import SendParcel from '../pages/sendParcel';
+import DashbordLayout from '../Root/DashbordLayout';
+import MyParcel from '../pages/Dashboard/myParcel';
 
 export const router = createBrowserRouter([
+  // MAIN ROOT
   {
     path: "/",
-    Component: Root,
+    element: <Root />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
         index: true,
-        Component: Home
+        element: <Home />
       },
       {
-        path: '/rider',
-        element: <PrivateRoute>
-          <Raider></Raider>
-        </PrivateRoute>
+        path: "rider",
+        element: (
+          <PrivateRoute>
+            <Raider />
+          </PrivateRoute>
+        )
       },
       {
-        path: '/sendParcel',
-        element: <PrivateRoute>
-          <SendParcel></SendParcel>
-        </PrivateRoute>,
+        path: "sendParcel",
+        element: (
+          <PrivateRoute>
+            <SendParcel />
+          </PrivateRoute>
+        ),
         loader: () => fetch('warehouses.json').then(res => res.json())
       },
       {
-        path: '/coverage',
-        Component: Coverage,
+        path: "coverage",
+        element: <Coverage />,
         loader: () => fetch('warehouses.json').then(res => res.json())
       },
     ]
   },
-  {
-    path: '/',
 
-    Component: AuthLayout,
+  // AUTH ROUTES
+  {
+    path: "/",
+    element: <AuthLayout />,
     children: [
       {
-        path: '/login',
-        Component: Login
-
+        path: "login",
+        element: <Login />
       },
       {
-        path: '/register',
-        Component: Register
-      },
+        path: "register",
+        element: <Register />
+      }
+    ]
+  },
 
+  // DASHBOARD ROUTES
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashbordLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "my-parcel", // FIXED: removed leading slash
+        element: <MyParcel />
+      }
     ]
   }
 ]);

@@ -25,7 +25,11 @@ const Navbar = () => {
         <li><NavLink to="/profile" style={getLinkStyle}>Services </NavLink></li>
         <li><NavLink to="/coverage" style={getLinkStyle}>Coverage </NavLink></li>
         <li><NavLink to="/sendParcel" style={getLinkStyle}>Send a Parcel</NavLink></li>
-
+        {
+            user && <>
+                <li><NavLink to="/dashboard/my-parcel" style={getLinkStyle}>My Parcel</NavLink></li>
+            </>
+        }
 
     </>
     return (

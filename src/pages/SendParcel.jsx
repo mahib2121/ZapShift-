@@ -1,10 +1,12 @@
 import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useRoutes } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import useAuth from '../hooks/useAuth';
 
 const SendParcel = () => {
-
+    const { user } = useAuth()
     const {
         register,
         handleSubmit,
@@ -18,6 +20,7 @@ const SendParcel = () => {
     });
 
     const serviceCenter = useLoaderData();
+    const axiosSecure = useAxiosSecure();
 
     // Unique region list
     const RegionDuplicate = serviceCenter.map(c => c.region);
@@ -151,6 +154,8 @@ const SendParcel = () => {
                                 type="text"
                                 placeholder="Sender Name"
                                 {...register("senderName", { required: true })}
+                                defaultValue={user?.displayName || ""}
+
                                 className="input input-bordered w-full"
                             />
                             {errors.senderName && <p className="text-red-500">Required</p>}
