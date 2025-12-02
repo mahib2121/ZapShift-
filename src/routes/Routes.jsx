@@ -12,6 +12,8 @@ import Raider from '../pages/RAider/Raider';
 import SendParcel from '../pages/sendParcel';
 import DashbordLayout from '../Root/DashbordLayout';
 import MyParcel from '../pages/Dashboard/myParcel';
+import Payment from '../pages/Dashboard/Payment';
+import PaymentSuccess from '../pages/Dashboard/PaymentSuccess';
 
 export const router = createBrowserRouter([
   // MAIN ROOT
@@ -77,6 +79,14 @@ export const router = createBrowserRouter([
       {
         path: "my-parcel", // FIXED: removed leading slash
         element: <MyParcel />
+      },
+      {
+        path: 'payment/:parcelId',
+        Component: Payment
+      },
+      {
+        path: 'payment-success',
+        Component: PaymentSuccess
       }
     ]
   }
